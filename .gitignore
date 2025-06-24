@@ -2,6 +2,10 @@
 bin/
 obj/
 bin/
+Debug/
+Release/
+x64/
+x86/
 artifacts/
 output/
 *.user
