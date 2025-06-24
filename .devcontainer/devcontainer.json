@@ -1,0 +1,17 @@
+{
+    "name": "taxrecon-dev",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": ["--env-file", ".env.devcontainer"],
+    "forwardPorts": [5000, 5001, 5002, 5003, 16686],
+    "postCreateCommand": "dotnet restore taxrecon.sln",
+    "features": {},
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "dotnet.defaultSolution": "taxrecon.sln"
+            }
+        }
+    }
+}
