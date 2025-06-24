@@ -1,4 +1,22 @@
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Instrumentation.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add OpenTelemetry tracing with Jaeger exporter and resource info
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing
+        .SetResourceBuilder(ResourceBuilder.CreateDefault()
+            .AddService("Customer.Api", serviceVersion: "1.0.0")
+            .AddEnvironmentVariableDetector())
+        .AddAspNetCoreInstrumentation()
+        .AddJaegerExporter(options =>
+        {
+            options.AgentHost = builder.Configuration["Jaeger:Host"] ?? "localhost";
+            options.AgentPort = int.TryParse(builder.Configuration["Jaeger:Port"], out var port) ? port : 6831;
+        })
+    );
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -41,4 +59,8 @@ app.Run();
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
+
+namespace Customer.Api {
+    public partial class Program { }
 }
