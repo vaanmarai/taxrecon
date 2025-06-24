@@ -70,3 +70,39 @@ Client Upload Rate: What percentage of an accountant's clients successfully uplo
 Time Saved per Return: Collect qualitative and ideally quantitative feedback on time savings.
 Accuracy of Reconciliation: Low error rate in flagging discrepancies.
 User Feedback: Direct feedback from accountants and their clients on ease of use and value.
+
+---
+
+## Local Development & Tracing
+
+### Prerequisites
+- Docker (for Jaeger)
+- .NET 8 SDK
+- VS Code (recommended, with Dev Containers extension)
+
+### Quick Start (Devcontainer)
+1. Open the project in VS Code and reopen in devcontainer when prompted.
+2. Jaeger will be available at http://localhost:16686.
+3. Run the API projects:
+   - `dotnet run --project Accountant.Api/Accountant.Api.csproj`
+   - `dotnet run --project Customer.Api/Customer.Api.csproj`
+4. Access Jaeger UI and verify traces for each API.
+
+### Quick Start (Manual)
+1. Start Jaeger:
+   - `docker-compose -f .devcontainer/docker-compose.yml up jaeger`
+2. Run the API projects as above.
+3. Set environment variables if needed:
+   - `export Jaeger__Host=localhost`
+   - `export Jaeger__Port=6831`
+
+### Running Tests
+- Run all tests: `dotnet test taxrecon.sln`
+
+---
+
+## Architecture
+See `ARCHITECTURE.md` for project structure, separation, and observability details.
+
+## Project Kickoff Plan
+See `Project-Kickoff-Plan.md` for the full engineering breakdown and checklist.

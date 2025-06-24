@@ -20,10 +20,19 @@ Each domain is split into:
 - **API projects** expose REST endpoints, handle business logic, and data access. They are the only projects that interact with databases or external services.
 - Communication between UI and API is via HTTP calls (e.g., using `HttpClient`).
 
-## Benefits
-- Clear separation of concerns
-- Easier to scale, test, and secure each layer
-- Enables independent deployment and development
+## Observability & Tracing
+- Both API projects are instrumented with OpenTelemetry and export traces to Jaeger.
+- Jaeger is available locally via devcontainer/docker-compose for easy trace visualization.
+- Service names are unique per API for clear trace separation.
+
+## Testing & CI
+- Each project has unit and integration test projects (xUnit, bUnit, etc.).
+- GitHub Actions CI builds and tests all projects on push/PR.
+
+## Local Development
+- Devcontainer includes .NET SDKs and Jaeger.
+- Environment variables for Jaeger agent are pre-configured.
+- See README for local run/test instructions.
 
 ---
 
