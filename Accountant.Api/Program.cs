@@ -26,17 +26,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    // Disable HTTPS redirection in development if certificate issues persist
-    // app.UseHttpsRedirection();
-}
-else
-{
-    app.UseHttpsRedirection();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+// Disable HTTPS redirection in development if certificate issues persist
+// app.UseHttpsRedirection();
 
 var summaries = new[]
 {
