@@ -30,9 +30,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // Disable HTTPS redirection in development if certificate issues persist
+    // app.UseHttpsRedirection();
 }
-
-app.UseHttpsRedirection();
+else
+{
+    app.UseHttpsRedirection();
+}
 
 var summaries = new[]
 {
