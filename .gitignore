@@ -1,6 +1,9 @@
 # .NET build artifacts
 bin/
 obj/
+bin/
+artifacts/
+output/
 *.user
 *.suo
 *.userosscache
@@ -9,9 +12,9 @@ obj/
 # VS Code
 .vscode/
 
-# Rider
-.idea/
-*.sln.iml
+# Devcontainer
+.devcontainer/.env
+.devcontainer/data/
 
 # Test results
 TestResults/
